@@ -6,12 +6,11 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:30:18 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 16:05:49 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/20 17:51:54 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
-# include "get_next_line.h"
 #include "alum1.h"
 
 void		ft_disp_lst(t_list *lst)
@@ -20,18 +19,14 @@ void		ft_disp_lst(t_list *lst)
 		return ;
 	while (lst)
 	{
-		if (lst)
-		{
-			ft_putnbr(((t_board *)(lst->content))->matches);
-			ft_putchar('\n');
-		}
+		ft_putnbr(((t_board *)(lst->content))->matches);
+		ft_putchar('\n');
 		lst = lst->next;
 	}
 }
 
 static int	ft_read_board(int fd, t_list **lst)
 {
-	//static char *last_line;
 	char	*str;
 	t_board	*board;
 	t_list	*new;
@@ -40,7 +35,6 @@ static int	ft_read_board(int fd, t_list **lst)
 	{
 		if ((board = (t_board *)malloc(sizeof(t_board))) == NULL)
 			return (-1);
-
 		board->matches = ft_atoi(str);
 		if ((ft_strcmp(str, (char *)"") != 0)
 				&& (ft_atoi(str) < 1 || ft_atoi(str) > 10000))
@@ -68,8 +62,11 @@ int			ft_get_board(const char *file_name, t_list **lst, int mode)
 			return (-1);
 		if (close(fd) == -1)
 			return (-1);
-		}
+	}
 	else
+	{
+		fd = 0;
 		ft_read_board(fd, lst);
+	}
 	return (0);
 }
