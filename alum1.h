@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:27:40 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 20:21:49 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/20 20:50:28 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			ft_game_loop(t_list **lst);
 /*
 ** utils.c
 */
-double		ft_ratio_zeros_len(char *str);
+double		ft_ratio_char_len(char *str, int chr);
 int			ft_xor_sum(t_list *lst);
 
 #endif

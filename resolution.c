@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 16:34:26 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 20:39:14 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/20 20:51:14 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static int ft_best_sol(t_list *lst)
    
 	xor = ft_xor_sum(lst);
 	matches = ((t_board *)(lst)->content)->matches;
-	xor_sum_zeros[0] = ft_ratio_zeros_len(ft_ntoa_base((long long)(xor ^ (matches - 1)), ft_strdup("01")));
-	xor_sum_zeros[1] = ft_ratio_zeros_len(ft_ntoa_base((long long)(xor ^ (matches - 2)), ft_strdup("01")));
-	xor_sum_zeros[2] = ft_ratio_zeros_len(ft_ntoa_base((long long)(xor ^ (matches - 3)), ft_strdup("01")));
+	xor_sum_zeros[0] = ft_ratio_char_len(ft_ntoa_base((long long)(xor ^ (matches - 1)), ft_strdup("01")), '1');
+	xor_sum_zeros[1] = ft_ratio_char_len(ft_ntoa_base((long long)(xor ^ (matches - 2)), ft_strdup("01")), '1');
+	xor_sum_zeros[2] = ft_ratio_char_len(ft_ntoa_base((long long)(xor ^ (matches - 3)), ft_strdup("01")), '1');
 //	printf("xor_sum_zeros[0] '%f'\n", xor_sum_zeros[0]);
 //	printf("xor_sum_zeros[1] '%f'\n", xor_sum_zeros[1]);
 //	printf("xor_sum_zeros[2] '%f'\n", xor_sum_zeros[2]);
@@ -122,6 +122,14 @@ int	ft_game_loop(t_list **lst)
 		beg = *lst;
 		if (ft_player(lst) == 1)
 			return (0);
+		while (beg)
+		{
+			if (beg->next == NULL && (((t_board *)(beg->content))->matches == 0))
+				return (0);
+			beg = beg->next;
+		}
+		ft_disp_lst(*lst);
+		beg = *lst;
 		ft_ia(lst);
 		while (beg)
 		{

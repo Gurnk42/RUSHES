@@ -6,30 +6,26 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 19:51:09 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 20:36:34 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/20 20:50:12 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "alum1.h"
 
-double	ft_ratio_zeros_len(char *str)
+double	ft_ratio_char_len(char *str, int chr)
 {
-	int	occur_one;
-	int	occur_zero;
+	int	occur;
 	int	len;
 
-	occur_zero = 0;
-	occur_one = 0;
+	occur = 0;
 	len = ft_strlen(str);
 	while (*str)
 	{
-		if (*str == '0')
-			occur_zero++;
-		if (*str == '1')
-			occur_one++;
+		if (*str == chr)
+			occur++;
 		str++;
 	}
-	return ((double)occur_one / len);
+	return ((double)occur / len);
 }
 
 int	ft_xor_sum(t_list *lst)
