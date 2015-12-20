@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 16:34:26 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 19:08:53 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/20 20:34:17 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,37 @@ static void	ft_del_first_node(t_list **lst)
 	}
 }
 
+static int ft_best_sol(t_list *lst)
+{
+	int		matches;
+	double	xor_sum_zeros[3];
+	int		xor;
+	int		solution;
+   
+	xor = ft_xor_sum(lst);
+	matches = ((t_board *)(lst)->content)->matches;
+	xor_sum_zeros[0] = ft_ratio_zeros_len(ft_ntoa_base((long long)(xor ^ (matches - 1)), ft_strdup("01")));
+	xor_sum_zeros[1] = ft_ratio_zeros_len(ft_ntoa_base((long long)(xor ^ (matches - 2)), ft_strdup("01")));
+	xor_sum_zeros[2] = ft_ratio_zeros_len(ft_ntoa_base((long long)(xor ^ (matches - 3)), ft_strdup("01")));
+//	printf("xor_sum_zeros[0] '%f'\n", xor_sum_zeros[0]);
+//	printf("xor_sum_zeros[1] '%f'\n", xor_sum_zeros[1]);
+//	printf("xor_sum_zeros[2] '%f'\n", xor_sum_zeros[2]);
+	if ((xor_sum_zeros[0] >= xor_sum_zeros[1] && xor_sum_zeros[0] >= xor_sum_zeros[2]) && (matches - 1) >= 0)
+		solution = 1;
+	if ((xor_sum_zeros[1] >= xor_sum_zeros[0] && xor_sum_zeros[1] >= xor_sum_zeros[2]) && (matches - 2) >= 0)
+		solution = 2;
+	if ((xor_sum_zeros[2] >= xor_sum_zeros[1] && xor_sum_zeros[2] >= xor_sum_zeros[0]) && (matches - 3) >= 0)
+		solution = 3;
+	printf("AI removed '%d' matches\n", solution);
+	return (solution);
+}
+
 static int ft_ia(t_list **lst)
 {
-	t_list *begin;
-	int	xor;
-
-	xor = 0;
-	begin = *lst;	
+	//t_list *begin;
+	//begin = *lst;
 	ft_putendl("IA's TURN");
-	((t_board *)((*lst)->content))->matches -= 1; // CHANGE 1
+	((t_board *)((*lst)->content))->matches -= ft_best_sol(*lst);
 	if (((t_board *)((*lst)->content))->matches == 0)
 	{
 		if ((*lst)->next != NULL)
@@ -50,14 +72,6 @@ static int ft_ia(t_list **lst)
 			return (0);
 		}
 	}
-	/*while (*lst)
-	{
-		printf("matches '%d'\n", ((t_board *)(*lst)->content)->matches);
-		xor = xor ^ ((t_board *)(*lst)->content)->matches;
-		*lst = (*lst)->next;
-	}*/
-	//printf("xor : '%d'\n", xor);
-	//
 	return (0);
 }
 

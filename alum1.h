@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:27:40 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 19:09:15 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/20 20:21:49 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ void		ft_disp_lst(t_list *lst);
 /*
 ** resolution.c
 */
-int	ft_game_loop(t_list **lst);
+int			ft_game_loop(t_list **lst);
+
+/*
+** utils.c
+*/
+double		ft_ratio_zeros_len(char *str);
+int			ft_xor_sum(t_list *lst);
 
 #endif

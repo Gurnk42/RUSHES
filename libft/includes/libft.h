@@ -6,7 +6,7 @@
 /*   By: ebouther <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:08:57 by ebouther          #+#    #+#             */
-/*   Updated: 2015/11/30 13:40:00 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/20 19:38:34 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ char				*ft_strswap(char *str);
 char				*ft_strrev(char *str);
 int					ft_abs(int nb);
 char				*ft_itoa_base(int value, int base);
+char				*ft_ntoa_base(long long n, char *base);
+char				*ft_ntoa_base_un(unsigned long long n, char *base);
 int					ft_isprime(int nb);
 int					ft_sqrt(int nb);
 

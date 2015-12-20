@@ -6,7 +6,7 @@
 #    By: ebouther <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 18:24:09 by ebouther          #+#    #+#              #
-#    Updated: 2015/12/15 19:22:46 by ebouther         ###   ########.fr        #
+#    Updated: 2015/12/20 19:31:30 by ebouther         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ SRCS = 	ft_memset.c \
 	ft_strswap.c \
 	ft_strrev.c \
 	ft_itoa_base.c \
+	ft_ntoa_base.c \
 	ft_isprime.c \
 	ft_sqrt.c
 
