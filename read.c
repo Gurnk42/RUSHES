@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:30:18 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 19:31:05 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/20 21:26:59 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 void		ft_disp_lst(t_list *lst)
 {
-	if (lst == NULL)
-		return ;
 	while (lst)
 	{
 		ft_putnbr(((t_board *)(lst->content))->matches);
@@ -36,6 +34,7 @@ static int	ft_read_board(int fd, t_list **lst)
 		if ((board = (t_board *)malloc(sizeof(t_board))) == NULL)
 			return (-1);
 		board->matches = ft_atoi(str);
+		board->at_start = board->matches;
 		if ((ft_strcmp(str, (char *)"") != 0)
 				&& (ft_atoi(str) < 1 || ft_atoi(str) > 10000))
 			return (-1);

@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 19:51:09 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 20:50:12 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/20 21:26:56 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,30 @@ int	ft_xor_sum(t_list *lst)
 		begin = begin->next;
 	}
 	return (xor);
+}
+
+void	ft_disp_matches(t_list *lst)
+{
+	int	i;
+
+	while (lst)
+	{
+		i = 0;
+		while (i < ((t_board *)(lst->content))->matches)
+		{
+			ft_putstr("\033[1;31m.\033[0m");
+			ft_putchar(' ');
+			i++;
+		}
+		ft_putchar('\n');
+		i = 0;
+		while (i < ((t_board *)(lst->content))->matches)
+		{
+			ft_putstr("\033[1;33m|\033[0m");
+			ft_putchar(' ');
+			i++;
+		}
+		ft_putchar('\n');
+		lst = lst->next;
+	}
 }

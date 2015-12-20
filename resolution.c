@@ -6,14 +6,11 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 16:34:26 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 20:51:14 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/20 21:19:22 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "alum1.h"
-//
-#include <stdio.h>
-//
 
 static void	ft_del_first_node(t_list **lst)
 {
@@ -43,23 +40,18 @@ static int ft_best_sol(t_list *lst)
 	xor_sum_zeros[0] = ft_ratio_char_len(ft_ntoa_base((long long)(xor ^ (matches - 1)), ft_strdup("01")), '1');
 	xor_sum_zeros[1] = ft_ratio_char_len(ft_ntoa_base((long long)(xor ^ (matches - 2)), ft_strdup("01")), '1');
 	xor_sum_zeros[2] = ft_ratio_char_len(ft_ntoa_base((long long)(xor ^ (matches - 3)), ft_strdup("01")), '1');
-//	printf("xor_sum_zeros[0] '%f'\n", xor_sum_zeros[0]);
-//	printf("xor_sum_zeros[1] '%f'\n", xor_sum_zeros[1]);
-//	printf("xor_sum_zeros[2] '%f'\n", xor_sum_zeros[2]);
 	if ((xor_sum_zeros[0] >= xor_sum_zeros[1] && xor_sum_zeros[0] >= xor_sum_zeros[2]) && (matches - 1) >= 0)
 		solution = 1;
 	if ((xor_sum_zeros[1] >= xor_sum_zeros[0] && xor_sum_zeros[1] >= xor_sum_zeros[2]) && (matches - 2) >= 0)
 		solution = 2;
 	if ((xor_sum_zeros[2] >= xor_sum_zeros[1] && xor_sum_zeros[2] >= xor_sum_zeros[0]) && (matches - 3) >= 0)
 		solution = 3;
-	printf("AI removed '%d' matches\n", solution);
+	//printf("AI removed '%d' matches\n", solution);
 	return (solution);
 }
 
 static int ft_ia(t_list **lst)
 {
-	//t_list *begin;
-	//begin = *lst;
 	ft_putendl("IA's TURN");
 	((t_board *)((*lst)->content))->matches -= ft_best_sol(*lst);
 	if (((t_board *)((*lst)->content))->matches == 0)
@@ -112,7 +104,6 @@ static int ft_player(t_list **lst)
 
 int	ft_game_loop(t_list **lst)
 {
-	//t_env	env;
 	t_list	*beg;
 	int		pos;
 
@@ -128,7 +119,7 @@ int	ft_game_loop(t_list **lst)
 				return (0);
 			beg = beg->next;
 		}
-		ft_disp_lst(*lst);
+		ft_disp_matches(*lst);
 		beg = *lst;
 		ft_ia(lst);
 		while (beg)
@@ -137,7 +128,7 @@ int	ft_game_loop(t_list **lst)
 				return (0);
 			beg = beg->next;
 		}
-		ft_disp_lst(*lst);
+		ft_disp_matches(*lst);
 	}
 	return (0);
 }

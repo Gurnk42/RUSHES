@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:27:40 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 20:50:28 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/20 21:18:33 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct	s_board
 {
 	int			matches;
+	int			at_start;
 }				t_board;
 
 typedef struct	s_env
@@ -43,5 +44,6 @@ int			ft_game_loop(t_list **lst);
 */
 double		ft_ratio_char_len(char *str, int chr);
 int			ft_xor_sum(t_list *lst);
+void		ft_disp_matches(t_list *);
 
 #endif
