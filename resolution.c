@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 16:34:26 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 21:19:22 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/20 23:30:35 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	ft_del_first_node(t_list **lst)
 	}
 }
 
-static int ft_best_sol(t_list *lst)
+static int ft_best_sol_for_classic_nim(t_list *lst)
 {
 	int		matches;
 	double	xor_sum_zeros[3];
@@ -46,13 +46,36 @@ static int ft_best_sol(t_list *lst)
 		solution = 2;
 	if ((xor_sum_zeros[2] >= xor_sum_zeros[1] && xor_sum_zeros[2] >= xor_sum_zeros[0]) && (matches - 3) >= 0)
 		solution = 3;
-	//printf("AI removed '%d' matches\n", solution);
+	ft_putstr((char *)"\nAI removed ");
+	ft_putnbr(solution);
+	ft_putstr((char *)" matches.\n");
 	return (solution);
+}
+
+static int ft_best_sol(t_list *lst)
+{
+	int	i;
+	int sol;
+	int	matches;
+
+	i = 0;
+	sol = 0;
+	matches = ((t_board *)(lst)->content)->matches;
+	while ((((i * 4) + 1)) < matches)
+	{
+		sol = matches - ((i * 4) + 1);
+		i++;
+	}
+	if (sol == 0)
+		sol = 1;
+	ft_putstr((char *)"\nAI removed ");
+	ft_putnbr(sol);
+	ft_putstr((char *)" matches.\n");
+	return (sol);
 }
 
 static int ft_ia(t_list **lst)
 {
-	ft_putendl("IA's TURN");
 	((t_board *)((*lst)->content))->matches -= ft_best_sol(*lst);
 	if (((t_board *)((*lst)->content))->matches == 0)
 	{
@@ -72,9 +95,12 @@ static int ft_player(t_list **lst)
 	char	*str;
 	int		nb;
 
-	ft_putendl("YOUR TURN");
+	ft_putendl("Your turn :");
 	get_next_line(0, &str);
 	nb = ft_atoi(str);
+	ft_putstr((char *)"\nYou removed ");
+	ft_putnbr(nb);
+	ft_putstr((char *)" matches.\n");
 	if (nb > 3 || nb < 1)	
 	{
 		ft_putendl("CHOOSE A NUMBER FROM 1 TO 3");
