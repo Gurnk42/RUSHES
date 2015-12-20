@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:30:18 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 14:45:23 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/20 16:05:49 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 void		ft_disp_lst(t_list *lst)
 {
+	if (lst == NULL)
+		return ;
 	while (lst)
 	{
 		if (lst)
@@ -23,47 +25,51 @@ void		ft_disp_lst(t_list *lst)
 			ft_putnbr(((t_board *)(lst->content))->matches);
 			ft_putchar('\n');
 		}
-		if (lst->next == NULL)
-			break;
 		lst = lst->next;
 	}
 }
 
-static void	ft_read_board(int fd, t_list **lst)
+static int	ft_read_board(int fd, t_list **lst)
 {
 	//static char *last_line;
 	char	*str;
 	t_board	*board;
 	t_list	*new;
-	int		i;
 
-	i = 0;
 	while (get_next_line(fd, &str))
 	{
-		board = (t_board *)malloc(sizeof(t_board));
+		if ((board = (t_board *)malloc(sizeof(t_board))) == NULL)
+			return (-1);
+
 		board->matches = ft_atoi(str);
+		if ((ft_strcmp(str, (char *)"") != 0)
+				&& (ft_atoi(str) < 1 || ft_atoi(str) > 10000))
+			return (-1);
 		if (ft_strcmp(str, ft_strdup("")) != 0)
 		{
-			new = ft_lstnew((void const *)board, (size_t)sizeof(board));
+			if ((new = ft_lstnew((void const *)board, (size_t)sizeof(board))) == NULL)
+				return (-1);
 			ft_lstadd(lst, new);
 		}
-		/*if (str[ft_strlen(str)] != '\0')
-		  {
-		  printf("CHAR : '%c'\n", str[ft_strlen(str)]);
-		  ft_putstr_fd(ft_strdup("ERROR\n"), 2);
-		  }*/
 		ft_memdel((void **)(&board));
-		i++;
 	}
+	return (0);
 }
 
-void		ft_get_board(const char *file_name, t_list **lst)
+int			ft_get_board(const char *file_name, t_list **lst, int mode)
 {
 	int		fd;
 
-	if ((fd = open(file_name, O_RDONLY)) == -1)
-		ft_putstr_fd(ft_strdup("ERROR\n"), 2);
-	ft_read_board(fd, lst);
-	if (close(fd) == -1)
-		ft_putstr_fd(ft_strdup("ERROR\n"), 2);
+	if (mode == 1)
+	{
+		if ((fd = open(file_name, O_RDONLY)) == -1)
+			return (-1);
+		if (ft_read_board(fd, lst) == -1)
+			return (-1);
+		if (close(fd) == -1)
+			return (-1);
+		}
+	else
+		ft_read_board(fd, lst);
+	return (0);
 }
