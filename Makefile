@@ -6,7 +6,7 @@
 #    By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/20 23:48:57 by ebouther          #+#    #+#              #
-#    Updated: 2015/12/21 17:04:46 by ebouther         ###   ########.fr        #
+#    Updated: 2015/12/21 17:24:25 by ebouther         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,20 +25,25 @@ SRCS = alum1.c \
 	   ascii_art.c \
 	   get_next_line.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS = alum1.o \
+	   resolution.o \
+	   utils.o \
+	   read.o \
+	   ascii_art.o \
+	   get_next_line.o
 
 all: $(NAME)
 
 $(NAME): $(SRCS)
-	make -C ./libft/
-	gcc -o $(NAME) $(FLAGS) $(SRCS)
+	@make -C ./libft/
+	@gcc -o $(NAME) $(FLAGS) $(SRCS)
 
 clean:
-	make -C ./libft/ clean
-	rm -f $(OBJS)
+	@make -C ./libft/ clean
+	@rm -f $(OBJS)
 
 fclean: clean
-	make -C ./libft/ fclean
-	rm -rf $(NAME)
+	@make -C ./libft/ fclean
+	@rm -rf $(NAME)
 
 re: fclean all
