@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:30:18 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/21 19:32:52 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 19:41:38 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ static int	ft_read_board(int fd, t_list **lst)
 		while (str[i])
 			if (ft_isdigit(str[i++]) == 0)
 				return (-1);
-		if (ft_atoi(str) < 1 || ft_atoi(str) > 10000)
+		if ((board->matches = ft_atoi(str)) < 1 || board->matches > 10000)
 			return (-1);
-		board->matches = ft_atoi(str);
 		board->at_start = board->matches;
 		if ((new = ft_lstnew((void const *)board,
 						(size_t)sizeof(board))) == NULL)
