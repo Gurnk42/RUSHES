@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/11 18:07:25 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/21 18:28:38 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 18:56:16 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*ft_strnew(size_t size)
 {
 	char	*str;
-	int		i;
 
 	str = (char*)malloc(size);
 	if (str == NULL)
