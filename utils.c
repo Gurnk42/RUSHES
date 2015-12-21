@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 19:51:09 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/21 20:07:18 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 21:28:12 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int			ft_input_error(t_list **lst, int nb)
 	}
 	if (((t_board *)((*lst)->content))->matches - nb < 0)
 	{
-		ft_putendl("YOUR NUMBER IS WAY TO BIG !!!");
+		ft_putendl("YOUR NUMBER IS WAY TOO BIG !!!");
 		ft_player(lst);
 		return (-1);
 	}

@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:30:18 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/21 21:10:58 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 21:26:10 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,8 @@ static int	ft_read_board(int fd, t_list **lst)
 			return (-1);
 		i = 0;
 		while (str[i])
-		{
-			ft_putchar(str[i]);
-			ft_putchar('\n');
 			if (ft_isdigit(str[i++]) == 0)
 				return (-1);
-		}
 		if ((board->matches = ft_atoi(str)) < 1 || board->matches > 10000)
 			return (-1);
 		board->at_start = board->matches;
@@ -52,6 +48,40 @@ static int	ft_read_board(int fd, t_list **lst)
 			return (-1);
 		ft_lstadd(lst, new);
 		ft_memdel((void **)(&board));
+	}
+	return (0);
+}
+
+static int	ft_read_board_input(int fd, t_list **lst)
+{
+	static char	*last_line = NULL;
+	char		*str;
+	t_board		*board;
+	t_list		*new;
+	int			i;
+
+	while (get_next_line(fd, &str))
+	{
+		if (ft_strcmp(str, (char *)"") == 0 && ft_strcmp(last_line, (char *)"") == 0)
+		{
+			ft_putstr("TRUE");
+			return (0);
+		}
+		if ((board = (t_board *)malloc(sizeof(t_board))) == NULL)
+			return (-1);
+		i = 0;
+		while (str[i])
+			if (ft_isdigit(str[i++]) == 0)
+				return (-1);
+		if ((board->matches = ft_atoi(str)) < 1 || board->matches > 10000)
+			return (-1);
+		board->at_start = board->matches;
+		if ((new = ft_lstnew((void const *)board,
+						(size_t)sizeof(board))) == NULL)
+			return (-1);
+		ft_lstadd(lst, new);
+		ft_memdel((void **)(&board));
+		last_line = str;
 	}
 	return (0);
 }
@@ -72,7 +102,7 @@ int			ft_get_board(const char *file_name, t_list **lst, int mode)
 	else
 	{
 		fd = 0;
-		if (ft_read_board(fd, lst) == -1)
+		if (ft_read_board_input(fd, lst) == -1)
 			return (-1);
 	}
 	return (0);
