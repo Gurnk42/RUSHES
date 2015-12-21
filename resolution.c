@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 16:34:26 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/21 17:02:05 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 17:13:02 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int			ft_game_loop(t_list **lst)
 			ft_ia(lst);
 		while (beg)
 		{
-			if (beg->next == NULL && (((t_board *)(beg->content))->matches == 0))
+			if (beg->next == NULL && !(((t_board *)(beg->content))->matches))
 				return (0);
 			beg = beg->next;
 		}
