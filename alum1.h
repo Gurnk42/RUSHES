@@ -6,13 +6,14 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:27:40 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/21 16:45:40 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 16:58:57 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ALUM1_H
 # define ALUM1_H
 
+# define AI 0
 # include "stdlib.h"
 # include "libft.h"
 # include "get_next_line.h"

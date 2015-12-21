@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 16:34:26 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/21 16:56:30 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 17:02:05 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static int	ft_best_sol(t_list *lst)
 	}
 	if (sol == 0)
 		sol = 1;
+	if (AI == 1)
+		return (ft_best_sol_for_classic_nim(lst));
 	return (sol);
 }
 

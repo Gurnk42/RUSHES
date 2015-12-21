@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 19:29:56 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 19:32:01 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 17:09:40 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static int	ft_get_res_length_un(unsigned long long n, int base_length)
 {
 	int		i;
 
+	if (base_length < 2)
+		return (-1);
 	if (n == 0)
 		return (1);
 	i = 0;
@@ -58,10 +60,8 @@ char		*ft_ntoa_base(long long n, char *base)
 	int		limit;
 
 	base_length = ft_strlen(base);
-	if (base_length < 2)
-		return (NULL);
-	res_length = ft_get_res_length(n, base_length);
-	if (!(res = (char*)malloc(sizeof(char) * (res_length + 1))))
+	if (((res_length = ft_get_res_length(n, base_length)) == -1)
+			|| !(res = (char*)malloc(sizeof(char) * (res_length + 1))))
 		return (NULL);
 	res[res_length] = '\0';
 	limit = 0;

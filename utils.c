@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 19:51:09 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/21 16:45:10 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 17:11:14 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ void		ft_disp_matches(t_list *lst)
 	}
 }
 
-int	ft_input_error(t_list **lst, int nb)
+int			ft_input_error(t_list **lst, int nb)
 {
-	if (nb > 3 || nb < 1)	
+	if (nb > 3 || nb < 1)
 	{
 		ft_putendl("CHOOSE A NUMBER FROM 1 TO 3");
 		ft_player(lst);
