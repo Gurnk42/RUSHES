@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:30:18 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/21 19:41:38 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 20:08:26 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,12 @@ static int	ft_read_board(int fd, t_list **lst)
 			return (-1);
 		i = 0;
 		while (str[i])
+		{
+			ft_putchar(str[i]);
+			ft_putchar('\n');
 			if (ft_isdigit(str[i++]) == 0)
 				return (-1);
+		}
 		if ((board->matches = ft_atoi(str)) < 1 || board->matches > 10000)
 			return (-1);
 		board->at_start = board->matches;
