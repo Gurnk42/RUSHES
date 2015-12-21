@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/11 18:07:25 by ebouther          #+#    #+#             */
-/*   Updated: 2015/11/23 14:38:06 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 18:28:38 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ char	*ft_strnew(size_t size)
 	char	*str;
 	int		i;
 
-	i = 0;
-	str = (char *)ft_memalloc(size + 1);
+	str = (char*)malloc(size);
 	if (str == NULL)
 		return (NULL);
-	while (str[i])
-		str[i++] = '\0';
+	ft_memset(str, (int)'\0', size + 1);
 	return (str);
 }

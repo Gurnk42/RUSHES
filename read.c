@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:30:18 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/21 16:23:02 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 18:50:58 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	ft_read_board(int fd, t_list **lst)
 		if ((ft_strcmp(str, (char *)"") != 0)
 				&& (ft_atoi(str) < 1 || ft_atoi(str) > 10000))
 			return (-1);
-		if (ft_strcmp(str, ft_strdup("")) != 0)
+		if (ft_strcmp(str, (char *)"") != 0)
 		{
 			if ((new = ft_lstnew((void const *)board,
 			(size_t)sizeof(board))) == NULL)
