@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:27:40 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/21 16:58:57 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 20:44:43 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int				ft_input_error(t_list **lst, int nb);
 ** ascii_art.c
 */
 void			ft_you_win();
+void			ft_you_lose(void);
 
 #endif

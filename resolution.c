@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 16:34:26 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/21 17:13:02 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 20:45:25 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int			ft_player(t_list **lst)
 			ft_del_first_node(lst);
 		else
 		{
-			ft_putendl("YOU LOSE !");
+			ft_you_lose();
 			return (1);
 		}
 	}
