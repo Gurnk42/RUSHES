@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:30:18 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/21 21:26:10 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 21:42:40 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ static int	ft_read_board_input(int fd, t_list **lst)
 	while (get_next_line(fd, &str))
 	{
 		if (ft_strcmp(str, (char *)"") == 0 && ft_strcmp(last_line, (char *)"") == 0)
-		{
-			ft_putstr("TRUE");
 			return (0);
-		}
 		if ((board = (t_board *)malloc(sizeof(t_board))) == NULL)
 			return (-1);
 		i = 0;
