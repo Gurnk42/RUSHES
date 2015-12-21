@@ -6,7 +6,7 @@
 #    By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/20 23:48:57 by ebouther          #+#    #+#              #
-#    Updated: 2015/12/21 17:24:25 by ebouther         ###   ########.fr        #
+#    Updated: 2015/12/21 17:48:35 by ebouther         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT = -L./libft/ -lft
 
 INCLUDES = -I./libft/includes/
 
-FLAGS += -Wall -Wextra -Werror $(LIBFT) $(INCLUDES)
+FLAGS += -Wall -Wextra -Werror $(INCLUDES)
 
 SRCS = alum1.c \
 	   resolution.c \
@@ -36,7 +36,9 @@ all: $(NAME)
 
 $(NAME): $(SRCS)
 	@make -C ./libft/
-	@gcc -o $(NAME) $(FLAGS) $(SRCS)
+	@gcc -c $(FLAGS) $(SRCS)
+	@gcc -o $(NAME) $(FLAGS) $(OBJS) $(LIBFT)
+	
 
 clean:
 	@make -C ./libft/ clean
