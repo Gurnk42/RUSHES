@@ -6,7 +6,7 @@
 /*   By: ebouther <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:18:00 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/18 13:41:34 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 17:21:01 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int		get_next_line(int const fd, char **line)
 		{
 			*str = '\0';
 			buf = ft_strdup(str + 1);
-			*line = ft_strjoin(*line, cpy);
+			*line = ft_strjoin_free(*line, cpy);
 			return (1);
 		}
-		*line = ft_strjoin(*line, cpy);
+		*line = ft_strjoin_free(*line, cpy);
 	}
 	return (ret);
 }
