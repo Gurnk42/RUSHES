@@ -6,13 +6,31 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 19:51:09 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 21:27:44 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 16:45:10 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "alum1.h"
 
-double	ft_ratio_char_len(char *str, int chr)
+void		ft_del_first_node(t_list **lst)
+{
+	t_list *tmp;
+
+	if (lst == NULL)
+		return ;
+	if (*lst)
+	{
+		tmp = (*lst)->next;
+		if (tmp)
+		{
+			free((void *)((t_board *)(*lst)->content));
+			free((void *)(*lst));
+			*lst = tmp;
+		}
+	}
+}
+
+double		ft_ratio_char_len(char *str, int chr)
 {
 	int	occur;
 	int	len;
@@ -28,13 +46,13 @@ double	ft_ratio_char_len(char *str, int chr)
 	return ((double)occur / len);
 }
 
-int	ft_xor_sum(t_list *lst)
+int			ft_xor_sum(t_list *lst)
 {
-	t_list *begin;
+	t_list	*begin;
 	int		xor;
-	
+
 	begin = lst->next;
-	xor = 0;	
+	xor = 0;
 	while (begin)
 	{
 		xor = xor ^ ((t_board *)begin->content)->matches;
@@ -43,7 +61,7 @@ int	ft_xor_sum(t_list *lst)
 	return (xor);
 }
 
-void	ft_disp_matches(t_list *lst)
+void		ft_disp_matches(t_list *lst)
 {
 	int	i;
 
@@ -67,4 +85,21 @@ void	ft_disp_matches(t_list *lst)
 		ft_putchar('\n');
 		lst = lst->next;
 	}
+}
+
+int	ft_input_error(t_list **lst, int nb)
+{
+	if (nb > 3 || nb < 1)	
+	{
+		ft_putendl("CHOOSE A NUMBER FROM 1 TO 3");
+		ft_player(lst);
+		return (-1);
+	}
+	if (((t_board *)((*lst)->content))->matches - nb < 0)
+	{
+		ft_putendl("YOUR NUMBER IS WAY TO BIG !!!");
+		ft_player(lst);
+		return (-1);
+	}
+	return (0);
 }

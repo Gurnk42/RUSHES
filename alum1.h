@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:27:40 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 21:27:45 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 16:45:40 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,27 @@ typedef struct	s_env
 /*
 ** read.c
 */
-int			ft_get_board(const char *file_name, t_list **lst, int mode);
-void		ft_disp_lst(t_list *lst);
+int				ft_get_board(const char *file_name, t_list **lst, int mode);
+void			ft_disp_lst(t_list *lst);
 
 /*
 ** resolution.c
 */
-int			ft_game_loop(t_list **lst);
+int				ft_game_loop(t_list **lst);
+int				ft_player(t_list **lst);
 
 /*
 ** utils.c
 */
-double		ft_ratio_char_len(char *str, int chr);
-int			ft_xor_sum(t_list *lst);
-void		ft_disp_matches(t_list *);
+double			ft_ratio_char_len(char *str, int chr);
+int				ft_xor_sum(t_list *lst);
+void			ft_disp_matches(t_list *lst);
+void			ft_del_first_node(t_list **lst);
+int				ft_input_error(t_list **lst, int nb);
+
+/*
+** ascii_art.c
+*/
+void			ft_you_win();
 
 #endif

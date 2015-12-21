@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:26:59 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 23:29:51 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 15:58:31 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	main(int argc, char **argv)
 			ft_putstr_fd(ft_strdup("ERROR\n"), 2);
 			return (-1);
 		}
-		ft_disp_lst(lst);
+		ft_disp_matches(lst);
 	}
 	else if (argc == 1)
 	{
 		if (ft_get_board((const char *)argv[1], &lst, 0) == -1)
 			return (-1);
-		ft_disp_lst(lst);
+		ft_disp_matches(lst);
 	}
 	else
 	{

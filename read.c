@@ -6,7 +6,7 @@
 /*   By: ebouther <ebouther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 11:30:18 by ebouther          #+#    #+#             */
-/*   Updated: 2015/12/20 21:27:43 by ebouther         ###   ########.fr       */
+/*   Updated: 2015/12/21 16:23:02 by ebouther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static int	ft_read_board(int fd, t_list **lst)
 			return (-1);
 		if (ft_strcmp(str, ft_strdup("")) != 0)
 		{
-			if ((new = ft_lstnew((void const *)board, (size_t)sizeof(board))) == NULL)
+			if ((new = ft_lstnew((void const *)board,
+			(size_t)sizeof(board))) == NULL)
 				return (-1);
 			ft_lstadd(lst, new);
 		}
