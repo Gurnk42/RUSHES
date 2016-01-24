@@ -1,0 +1,3 @@
+#!yasl
+"Hello world\n"
+print
