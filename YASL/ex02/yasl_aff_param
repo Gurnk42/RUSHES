@@ -1,6 +1,0 @@
-#!yasl
-!!0:#:0
-#(
-	print
-	"\n" print
-)
