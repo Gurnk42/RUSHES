@@ -17,8 +17,7 @@ static void		ft_print_map(t_env *e)
 	while (i < BOARD * BOARD)
 	{
 		mvprintw(y, x, ft_itoa(e->map[i]));
-		x += 4;
-		refresh();
+		x += BOARD;
 		if (i % (BOARD) == BOARD - 1)
 		{
 			y += 2;
@@ -26,6 +25,9 @@ static void		ft_print_map(t_env *e)
 		}
 		i++;
 	}
+	mvprintw(20, 50, "%f", ((double)(e->end - e->start)) / CLOCKS_PER_SEC);
+	//mvprintw(20, 70, "%d", e->dbg);
+	refresh();
 }
 
 static unsigned int	ft_get_random(unsigned int max)
@@ -66,13 +68,32 @@ static void ft_sighandler(int signum)
 static void	ft_new_rand(t_env *e)
 {
 	unsigned int	r_pos;
+	int				i;
+	int				max;
 
-	while ((e->map[r_pos = ft_get_random(15)]) != 0) // NEED TIMEOUT THERE TO END UP GAME IF ALL CASES FILLED
-		;
-	e->map[r_pos] = ft_get_random(1) ? 4 : 2; // DOESN'T SEEM TO BE FULL RAND
+	i = 0;
+	max = 0;
+	while (i < BOARD * BOARD)
+	{
+		if (e->map[i++] == 0)
+			max++;
+	}
+	r_pos = ft_get_random(max) + 1;
+	i = 0;
+	while (i < BOARD * BOARD)
+	{
+		if (e->map[i] == 0)
+			r_pos--;
+		if (r_pos <= 0)
+		{
+			e->map[i] = ft_get_random(1) ? 4 : 2;
+			break ;
+		}
+		i++;
+	}
 }
 
-static void		ft_push_right(int (*p)[4])
+static void		ft_push_right(int (*p)[BOARD])
 {
 	int	i;
 	int	done;
@@ -95,7 +116,7 @@ static void		ft_push_right(int (*p)[4])
 	}
 }
 
-static void		ft_push_left(int (*p)[4])
+static void		ft_push_left(int (*p)[BOARD])
 {
 	int	i;
 	int	done;
@@ -333,13 +354,6 @@ static unsigned int	ft_move_down(t_env *e)
 		ft_fill_down(&p, &x, e);
 		y = 0;
 		j = 0;
-	#ifdef EBUG
-		printf(" '%d' ", p[0]);
-		printf(" '%d' ", p[1]);
-		printf(" '%d' ", p[2]);
-		printf(" '%d' ", p[3]);
-		printf("    ");
-	#endif
 		while (y <= ((BOARD - 1) * BOARD))
 		{
 			if (e->map[x + y] != p[j])
@@ -372,6 +386,8 @@ static void	ft_game_loop(t_env *e)
 			diff = ft_move_up(e);
 		else if (c == 'k')
 			diff = ft_move_down(e);
+		else if (c == 27)
+			break ;
 		if (diff > 0)
 			ft_new_rand(e);
 		if (ft_strchr("ijkl", (char)c) != NULL)
