@@ -72,6 +72,52 @@ static void	ft_new_rand(t_env *e)
 	e->map[r_pos] = ft_get_random(1) ? 4 : 2; // DOESN'T SEEM TO BE FULL RAND
 }
 
+static void		ft_push_right(int (*p)[4])
+{
+	int	i;
+	int	done;
+
+	done = 0;
+	while (done == 0)
+	{
+		i = BOARD - 1;
+		done = 1;
+		while (i >= 0)
+		{
+			if ((i - 1 >= 0) && (*p)[i] == 0 && (*p)[i - 1] != 0)
+			{
+				(*p)[i] = (*p)[i - 1];
+				(*p)[i - 1] = 0;
+				done = 0;
+			}
+			i--;
+		}
+	}
+}
+
+static void		ft_push_left(int (*p)[4])
+{
+	int	i;
+	int	done;
+
+	done = 0;
+	while (done == 0)
+	{
+		i = 0;
+		done = 1;
+		while (i < BOARD - 1)
+		{
+			if ((i + 1 < BOARD) && (*p)[i] == 0 && (*p)[i + 1] != 0)
+			{
+				(*p)[i] = (*p)[i + 1];
+				(*p)[i + 1] = 0;
+				done = 0;
+			}
+			i++;
+		}
+	}
+}
+
 static void		ft_fill_up(int (*p)[BOARD], int *x, t_env *e)
 {
 	int	y;
@@ -96,6 +142,7 @@ static void		ft_fill_up(int (*p)[BOARD], int *x, t_env *e)
 		}
 		j++;
 	}
+	ft_push_left(p);
 }
 
 static void		ft_fill_down(int (*p)[BOARD], int *x, t_env *e)
@@ -122,6 +169,7 @@ static void		ft_fill_down(int (*p)[BOARD], int *x, t_env *e)
 		}
 		j--;
 	}
+	ft_push_right(p);
 }
 
 static void		ft_fill_left(int (*p)[BOARD], int *y, t_env *e)
@@ -147,6 +195,7 @@ static void		ft_fill_left(int (*p)[BOARD], int *y, t_env *e)
 		}
 		x++;
 	}
+	ft_push_left(p);
 }
 
 static void		ft_fill_right(int (*p)[BOARD], int *y, t_env *e)
@@ -172,6 +221,7 @@ static void		ft_fill_right(int (*p)[BOARD], int *y, t_env *e)
 		}
 		x--;
 	}
+	ft_push_right(p);
 }
 
 static unsigned int	ft_move_left(t_env *e)
@@ -288,7 +338,7 @@ static unsigned int	ft_move_down(t_env *e)
 		printf(" '%d' ", p[1]);
 		printf(" '%d' ", p[2]);
 		printf(" '%d' ", p[3]);
-		printf("           ");
+		printf("    ");
 	#endif
 		while (y <= ((BOARD - 1) * BOARD))
 		{
@@ -324,6 +374,8 @@ static void	ft_game_loop(t_env *e)
 			diff = ft_move_down(e);
 		if (diff > 0)
 			ft_new_rand(e);
+		if (ft_strchr("ijkl", (char)c) != NULL)
+			clear();
 		ft_print_map(e);
 	}
 }
@@ -335,7 +387,7 @@ int	main(void)
 	ft_init(&env);
 	ft_print_map(&env);
 	ft_game_loop(&env);
-	//clear();
+	clear();
 	endwin();
 	return (0);
 }
