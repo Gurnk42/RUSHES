@@ -72,6 +72,31 @@ static void	ft_new_rand(t_env *e)
 	e->map[r_pos] = ft_get_random(1) ? 4 : 2; // DOESN'T SEEM TO BE FULL RAND
 }
 
+static void		ft_fill_up(int (*p)[BOARD], int *x, t_env *e)
+{
+	int	y;
+	int	j;
+
+	y = 0;	
+	j = 0;
+	while (y <= (BOARD - 1) * BOARD)
+	{
+		if (e->map[y + *x] != 0)
+			(*p)[j++] = e->map[y + *x];
+		y += BOARD;
+	}
+	y = 0;
+	j = 0;
+	while (j < BOARD)
+	{
+		if (j + 1 < BOARD && (*p)[j] == (*p)[j + 1])
+		{
+			(*p)[j] = (*p)[j + 1] + (*p)[j];
+			(*p)[j + 1] = 0;
+		}
+		j++;
+	}
+}
 
 static void		ft_fill_left(int (*p)[BOARD], int *y, t_env *e)
 {
@@ -183,6 +208,70 @@ static unsigned int	ft_move_right(t_env *e)
 	return (diff);
 }
 
+static unsigned int	ft_move_up(t_env *e)
+{
+	int	y;
+	int	x;
+	int	j;
+	int	diff;
+	int	p[BOARD];
+
+	diff = 0;
+	while (x < BOARD)
+	{
+		j = 0;
+		while (j < BOARD)
+			p[j++] = 0;
+		ft_fill_up(&p, &x, e);
+		y = 0;
+		j = 0;
+		while (y <= ((BOARD - 1) * BOARD))
+		{
+			if (e->map[x + y] != p[j])
+			{
+				e->map[x + y] = p[j];
+				diff++;
+			}
+			y += BOARD;
+			j++;
+		}
+		x++;
+	}
+	return (diff);
+}
+
+static unsigned int	ft_move_down(t_env *e)
+{
+	int	y;
+	int	x;
+	int	j;
+	int	diff;
+	int	p[BOARD];
+
+	diff = 0;
+	while (x < BOARD)
+	{
+		j = 0;
+		while (j < BOARD)
+			p[j++] = 0;
+		ft_fill_down(&p, &x, e);
+		y = 0;
+		j = 0;
+		while (y <= ((BOARD - 1) * BOARD))
+		{
+			if (e->map[x + y] != p[j])
+			{
+				e->map[x + y] = p[j];
+				diff++;
+			}
+			y += BOARD;
+			j++;
+		}
+		x++;
+	}
+	return (diff);
+}
+
 static void	ft_game_loop(t_env *e)
 {
 	int	c;
@@ -196,9 +285,9 @@ static void	ft_game_loop(t_env *e)
 			diff = ft_move_left(e);
 		else if (c == 'l')
 			diff = ft_move_right(e);
-		/*else if (c == 'i')
+		else if (c == 'i')
 			diff = ft_move_up(e);
-		else if (c == 'k')
+		/*else if (c == 'k')
 			diff = ft_move_down(e);*/
 		if (diff > 0)
 			ft_new_rand(e);
