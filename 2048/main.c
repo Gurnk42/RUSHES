@@ -1,4 +1,4 @@
-#include "2048.h"
+#include "game.h"
 
 //
 #include <stdio.h>
@@ -26,7 +26,7 @@ static void		ft_print_map(t_env *e)
 		i++;
 	}
 	mvprintw(20, 50, "%f", ((double)(e->end - e->start)) / CLOCKS_PER_SEC);
-	//mvprintw(20, 70, "%d", e->dbg);
+	mvprintw(40, 70, "%d", e->dbg);
 	refresh();
 }
 
@@ -44,6 +44,8 @@ static void		ft_init(t_env *e)
 	initscr();
 	noecho();
 	curs_set(FALSE);
+	keypad(stdscr, TRUE);
+
 	i = 0;
 	if ((e->map = (int *)malloc(sizeof(int) * (BOARD * BOARD))) == NULL)
 		return ;
@@ -53,7 +55,7 @@ static void		ft_init(t_env *e)
 	while ((init_pos[1] = ft_get_random(15)) == init_pos[0])
 		i = 0;
 	while (i < 2)
-		e->map[init_pos[i++]] = ft_get_random(1) ? 4 : 2; // DOESN'T SEEM TO BE FULL RAND
+		e->map[init_pos[i++]] = ft_get_random(1) ? 4 : 2;
 }
 
 static void ft_sighandler(int signum)
@@ -61,9 +63,8 @@ static void ft_sighandler(int signum)
 	if (signum == 2)
 		endwin();
 	printf("Caught signal %d, coming out...\n", signum);
-	exit(1);
+	exit(-1);
 }
-//getmaxyx
 
 static void	ft_new_rand(t_env *e)
 {
@@ -374,20 +375,22 @@ static void	ft_game_loop(t_env *e)
 	int	c;
 	int	diff;
 
+	c = 0;
 	while (1)
 	{
 		diff = 0;
 		c = getch();
-		if (c == 'j')
+		if (c == KEY_LEFT)
 			diff = ft_move_left(e);
-		else if (c == 'l')
+		else if (c == KEY_RIGHT)
 			diff = ft_move_right(e);
-		else if (c == 'i')
+		else if (c == KEY_UP)
 			diff = ft_move_up(e);
-		else if (c == 'k')
+		else if (c == KEY_DOWN)
 			diff = ft_move_down(e);
 		else if (c == 27)
 			break ;
+		e->dbg = c;
 		if (diff > 0)
 			ft_new_rand(e);
 		if (ft_strchr("ijkl", (char)c) != NULL)
